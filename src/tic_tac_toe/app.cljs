@@ -2,15 +2,26 @@
   (:require [gadget.inspector :as inspector]
             [replicant.dom :as r]))
 
-(defonce ^:private !state (atom 0))
+(def initial-state
+  {:count 0
+   :board [[nil nil nil]
+           [nil nil nil]
+           [nil nil nil]]
+   :current-player :x
+   :winner nil})
 
-(defn- main-view [state]
+(defonce ^:private !state (atom initial-state))
+
+(defn counter [count]
   [:div
    [:button {:type "text" :on {:click [[:decrement 2]]}} "--"]
    [:button {:type "text" :on {:click [[:decrement 1]]}} "-"]
-   [:span (str state)]
+   [:span (str count)]
    [:button {:type "text" :on {:click [[:increment 1]]}} "+"]
    [:button {:type "text" :on {:click [[:increment 2]]}} "++"]])
+
+(defn- main-view [{:keys [count]}]
+  (counter count))
 
 (defn- render! [state]
   (r/render
@@ -21,8 +32,8 @@
   (doseq [action actions]
     (let [[action-name & args] action]
       (case action-name
-        :increment (swap! !state #(+ % (first args)))
-        :decrement (swap! !state #(- % (first args))))))
+        :increment (swap! !state update :count #(+ % (first args)))
+        :decrement (swap! !state update :count #(- % (first args))))))
   (render! @!state))
 
 (defn ^{:dev/after-load true :export true} start! []
