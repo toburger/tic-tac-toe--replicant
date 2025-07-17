@@ -11,15 +11,14 @@
    :winner nil})
 
 (defn move [[x y]]
-  (fn [state]
-    (let [{:keys [board current-player]} state]
-      (when (game-logic/can-update-cell? board x y)
-        (let [new-board          (game-logic/update-board board x y current-player)
-              new-winner         (game-logic/get-winner new-board)
-              new-current-player (game-logic/switch-player current-player)]
-          {:board          new-board
-           :current-player new-current-player
-           :winner         new-winner})))))
+  (fn [{:keys [board current-player]}]
+    (when (game-logic/can-update-cell? board x y)
+      (let [new-board          (game-logic/update-board board x y current-player)
+            new-winner         (game-logic/get-winner new-board)
+            new-current-player (game-logic/switch-player current-player)]
+        {:board          new-board
+         :current-player new-current-player
+         :winner         new-winner}))))
 
 (defn restart-game []
   initial-state)
