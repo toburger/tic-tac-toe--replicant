@@ -1,0 +1,7 @@
+.clj-kondo
+.cpcache
+.lsp
+.shadow-cljs
+.vscode
+node_modules
+public/js/compiled
