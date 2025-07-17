@@ -25,7 +25,7 @@
         :decrement (swap! !state #(- % (first args))))))
   (render! @!state))
 
-(defn ^{:dev/after-reload true :export true} start! []
+(defn ^{:dev/after-load true :export true} start! []
   (render! @!state))
 
 (defn ^:export init! []
