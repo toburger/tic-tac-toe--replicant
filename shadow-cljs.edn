@@ -5,4 +5,6 @@
  {:app {:target :browser
         :output-dir "public/js/compiled"
         :asset-path "/js/compiled"
-        :modules {:main {:init-fn tic-tac-toe.app/init!}}}}}
+        :modules {:main {:init-fn tic-tac-toe.app/init!}}
+        :compiler-options {:optimizations :advanced
+                           :source-map true}}}}
