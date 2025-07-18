@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "shadow-cljs watch :app",
+    "release": "shadow-cljs release :app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
